@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CookTogether Profile</title>
+  <link rel="stylesheet" href="output.css" />
+  <style>
+
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f0f0f0; 
+      border-radius: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #c4c4c4; 
+      border-radius: 8px;
+      border: 2px solid #f0f0f0; 
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #a0a0a0; 
+    }
+
+
+  </style>
+</head>
+<body class="bg-gray-50 font-sans pt-[40px] overflow-x-hidden">
+  <!-- Bar sector -->
+  <div id="bar"class="fixed top-0 left-0 z-50 w-full h-[35px] flex justify-between items-center px-4 bg-[rgba(36,41,47,0.85)] backdrop-blur-md text-white shadow-md" style="-webkit-app-region: drag;">
+    <div class="flex items-center space-x-3">
+      <h1 class="text-orange-600 text-base font-bold text-2xl tracking-wide select-none">CookTogether</h1>
+    </div>
+    <pear-ctrl data-platform="darwin" class="h-[48px] flex items-center" style="-webkit-app-region: no-drag;"></pear-ctrl>
+  </div>
+
+   <!-- Profile sector -->
+  <section class="relative bg-white shadow-md shadow-xl/20 rounded-lg mx-8 mt-6 p-6">
+    <button onclick="openModal()" class="author-only absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition" aria-label="Edit Profile">
+      <svg class="feather feather-edit" fill="none" height="24" stroke="currentColor" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
+        xmlns="http://www.w3.org/2000/svg">
+        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+      </svg>
+    </button>
+
+    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center space-y-6 lg:space-y-0">
+      <div class="flex-shrink-0">
+        <img id="profileImage" src="" alt="Profile photo" class="w-32 h-32 rounded-full object-cover ring-4 ring-orange-100 shadow-sm" />
+      </div>
+
+      <div class="flex flex-col justify-between flex-grow space-y-4 pl-7">
+        <div>
+          <h2 id="profileName" class="text-2xl font-bold text-gray-900">[Your Name]</h2>
+          <p id="profileTitle" class="text-sm text-gray-600">[Your Title or Role]</p>
+          <p id="profileBio" class="mt-1 text-gray-700 max-w-2xl">
+            [A short description about you and your cooking style.]
+          </p>
+        </div>
+
+        <div class="flex space-x-8 text-sm text-gray-700 pt-2">
+          <div class="text-center">
+            <p class="text-xl font-bold">0</p>
+            <p>Recipes</p>
+          </div>
+          <div class="text-center">
+            <p class="text-xl font-bold text-orange-500">0</p>
+            <p>Total Views</p>
+          </div>
+        </div>
+
+        <div class="flex space-x-4 pt-2">
+          <button onclick="openRecipeModal()" class="author-only bg-orange-500 hover:bg-orange-600 text-white px-5 py-2 rounded-md font-medium flex items-center">
+            <span class="mr-1 text-lg">＋</span> Add Recipe
+          </button>
+
+          <button onclick="openPeerConnectModal()" class="author-only bg-gray-100 hover:bg-gray-200 text-gray-800 px-5 py-2 rounded-md font-medium flex items-center">
+            <span class="mr-1 text-lg">🔗</span> Connect Pear
+          </button>
+
+          <button id="exitPeerViewBtn"
+                  class="hidden bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-md font-medium flex items-center">
+            <span class="mr-1 text-lg">🚪</span> Exit Peer View
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- /////////////////////////////////////////////////////////////////////////////// -->
+
+  <!-- Placeholder for most viwed and most download  -->
+  <div class="mx-8 mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="bg-white rounded-lg shadow-md p-5">
+      <div class="flex items-center space-x-2 mb-2">
+        <h3 class="font-semibold text-gray-800">Most Viewed Recipe</h3>
+      </div>
+      <div class="flex items-start space-x-4">
+        <div class="w-16 h-16 bg-gray-200 rounded"></div>
+        <div>
+          <h4 class="font-bold text-gray-900">Cookies</h4>
+          <p class="text-sm text-gray-600">Classic recipe and chewy center</p>
+          <p class="text-xs text-gray-400 mt-1">3.2K views | 245 likes</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-md p-5">
+      <div class="flex items-center space-x-2 mb-2">
+        <h3 class="font-semibold text-gray-800">Most Downloaded Recipe</h3>
+      </div>
+      <div class="flex items-start space-x-4">
+        <div class="w-16 h-16 bg-gray-200 rounded"></div>
+        <div>
+          <h4 class="font-bold text-gray-900">Banana Bread</h4>
+          <p class="text-sm text-gray-600">The comfort food recipe</p>
+          <p class="text-xs text-gray-400 mt-1">1.8K downloads | 189 likes</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- /////////////////////////////////////////////////////////////////////////////// -->
+
+  <!-- My Recipes Section -->
+  <div class="mx-8 mt-8">
+    <h3 class="text-lg font-semibold text-gray-800 mb-2">My Recipes</h3>
+
+    <div id="recipesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-8 mt-6"></div>
+
+    <div id="profileModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/40 backdrop-blur-sm">
+      <div id="modalBackdrop" class="absolute inset-0"></div>
+      <div class="relative bg-white rounded-2xl w-full max-w-md p-6 shadow-xl z-10">
+        <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl font-bold">×</button>
+
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Edit Your Profile</h2>
+
+        <form id="profileForm" class="space-y-4">
+          <input type="text" id="modalName" placeholder="Your Name" class="w-full border rounded px-3 py-2" required />
+          <input type="text" id="modalTitle" placeholder="Your Title (e.g. Home Chef)" class="w-full border rounded px-3 py-2" required />
+          <textarea id="modalBio" placeholder="Your Bio" rows="3" class="w-full border rounded px-3 py-2" required></textarea>
+
+          <label for="imageInput" class="block text-gray-700 mb-1">Profile Image</label>
+          <input type="file" id="imageInput" accept="image/*" class="w-full border rounded px-3 py-2" />
+          <img id="imagePreview" src="" alt="Preview" class="w-24 h-24 mt-2 rounded-full object-cover hidden border-2 border-orange-200 shadow" />
+          <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md w-full">
+            Save Profile
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- /////////////////////////////////////////////////////////////////////////////// -->
+
+  <!-- Add recipe modal -->
+  <div id="recipeModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/40 backdrop-blur-sm">
+    <div class="absolute inset-0" onclick="closeRecipeModal()"></div>
+    <div class="relative bg-white rounded-xl w-full max-w-3xl p-8 shadow-xl z-10" onclick="event.stopPropagation()">
+      <button onclick="closeRecipeModal()" class="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl font-bold">×</button>
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6">Add a Recipe</h2>
+
+      <form id="recipeForm" class="space-y-6">
+        <div class="grid md:grid-cols-2 gap-6">
+          <input type="text" id="recipeTitle" placeholder="Recipe Title" class="w-full border rounded px-4 py-2" required />
+          <input type="text" id="recipeTime" placeholder="Time Taken (e.g., 25 min)" class="w-full border rounded px-4 py-2" required />
+        </div>
+
+        <textarea id="recipeDesc" placeholder="Short Description" rows="2" class="w-full border rounded px-4 py-2" required></textarea>
+
+        <div class="flex flex-col gap-6">
+          <textarea id="recipeIngredients" placeholder="Ingredients (one per line)" rows="4" class="w-full border rounded px-4 py-2" required></textarea>
+          <textarea id="recipeInstructions" placeholder="Instructions" rows="4" class="w-full border rounded px-4 py-2" required></textarea>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <select id="recipeCategory" class="w-full border rounded px-4 py-2">
+            <option>Main Course</option>
+            <option>Dessert</option>
+            <option>Appetizer</option>
+          </select>
+          <input type="file" id="recipeImage" accept="image/*" class="w-full border rounded px-4 py-2" />
+        </div>
+
+        <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-md w-full text-lg">
+          Save Recipe
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- //////////////////////////////////////////////////////////////////////////////////////////////// -->
+  <!-- Peer Connect Modal -->
+  <div id="peerModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-xl shadow-xl max-w-md w-full p-6 relative">
+      <button onclick="closePeerConnectModal()" class="absolute top-2 right-3 text-gray-500 hover:text-red-600 text-xl font-bold">&times;</button>
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Connect to Peer</h2>
+      
+      <input id="peerKeyInput" type="text" placeholder="Enter peer key (e.g. profileKey:recipeKey)..." class="w-full border rounded px-4 py-2 mb-3 text-sm"/>
+
+      <button onclick="connectToPeer()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded w-full mb-3">
+        Connect & View Peer
+      </button>
+
+      <div class="border-t pt-4 mt-4">
+        <button onclick="showMyPeerKey()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded w-full mb-2">
+          Show My Peer Key
+        </button>
+        <h3 class="text-sm text-gray-600 font-medium mb-2">Your Peer Key: </h3>
+        <div id="myPeerKeyDisplay" class="text-xs text-gray-700 hidden break-all text-center"></div>
+      </div>
+    </div>
+  </div>
+
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+  <!-- Recipe View Modal -->
+  <div id="recipeViewModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/40 backdrop-blur-sm">
+    <div class="absolute inset-0" onclick="closeRecipeView()"></div>
+
+    <div class="relative bg-white rounded-xl w-full max-w-4xl p-8 shadow-xl z-10 overflow-y-auto max-h-[90vh]" onclick="event.stopPropagation()">
+      <button onclick="closeRecipeView()" class="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl font-bold">×</button>
+
+      <div class="flex flex-col lg:flex-row gap-8">
+        <div class="flex-shrink-0 flex justify-center lg:justify-start">
+          <img id="viewImage" class="w-48 h-48 object-cover rounded-xl shadow border border-orange-200" alt="Recipe image" />
+        </div>
+
+        <div class="flex-1">
+          <h2 id="viewTitle" class="text-2xl font-bold text-gray-800 mb-2"></h2>
+          <p id="viewTime" class="text-sm text-orange-600 mb-4"></p>
+          <p id="viewDesc" class="text-gray-700 mb-4"></p>
+
+          <div class="mb-4">
+            <h3 class="font-semibold text-gray-800">Ingredients:</h3>
+            <ul id="viewIngredients" class="list-disc list-inside text-gray-600"></ul>
+          </div>
+
+          <div>
+            <h3 class="font-semibold text-gray-800">Instructions:</h3>
+            <p id="viewInstructions" class="text-gray-600 whitespace-pre-line"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-end space-x-4">
+        <button id="deleteRecipeBtn" onclick="deleteCurrentRecipe()" 
+          class="hidden bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
+          Delete Recipe
+        </button>
+
+        <button id="downloadRecipeBtn" onclick="downloadCurrentRecipe()"
+          class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+          Download Recipe
+        </button>
+      </div>
+    </div>
+  </div>
+
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////// -->
+  <!-- Footer -->
+  <footer class="bg-gray-100 text-gray-600 text-center py-4 mt-8">
+    <p class="text-sm">© 2023 CookTogether. All rights reserved.</p>
+  </footer>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
+
